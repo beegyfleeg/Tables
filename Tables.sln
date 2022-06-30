@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tables", "TablesLib\Tables.csproj", "{C4AD62B8-C4C3-4118-9061-7116A47E84EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TablesLib", "TablesLib\TablesLib.csproj", "{D0F5CB8E-AC8A-49F6-9804-21D57F41FD67}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4AD62B8-C4C3-4118-9061-7116A47E84EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4AD62B8-C4C3-4118-9061-7116A47E84EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4AD62B8-C4C3-4118-9061-7116A47E84EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4AD62B8-C4C3-4118-9061-7116A47E84EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0F5CB8E-AC8A-49F6-9804-21D57F41FD67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0F5CB8E-AC8A-49F6-9804-21D57F41FD67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0F5CB8E-AC8A-49F6-9804-21D57F41FD67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0F5CB8E-AC8A-49F6-9804-21D57F41FD67}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C117F0C4-95E4-480B-8ABD-19F167819FA7}
+	EndGlobalSection
+EndGlobal
