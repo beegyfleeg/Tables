@@ -5,25 +5,42 @@
 /// </summary>
 public class RenderArea
 {
+    /// <value>List of active Render Areas, in order of creation.</value>
+    public static IReadOnlyList<RenderArea> ActiveAreas => activeAreas;
+
     /// <value>The minimum height of the Render Area.</value>
-    public uint Height { get; private set; }
+    public int Height { get; private set; }
 
     /// <value>
-    /// The number of characters from the left of the console window the Render Area begins.
+    /// The number of columns from the left of the console window the Render Area begins.
     /// </value>
-    public uint OffsetX { get; private set; }
+    public int OffsetX { get; private set; }
 
     /// <value>
-    /// The number of characters from the top of the console window the Render Area begins.
+    /// The number of rows from the top of the console window the Render Area begins.
     /// </value>
-    public uint OffsetY { get; private set; }
+    public int OffsetY { get; private set; }
 
     /// <value>The minimum width of the RenderArea.</value>
-    public uint Width { get; private set; }
+    public int Width { get; private set; }
 
     static readonly List<RenderArea> activeAreas = new();
+    readonly static int originX = Console.CursorLeft;
+    readonly static int originY = Console.CursorTop;
 
-    public RenderArea(uint width, uint height, uint offsetX, uint offsetY)
+    public void Close()
+    {
+        activeAreas.Remove(this);
+    }
+
+    internal static void Print(string contents, int left, int top)
+    {
+        int maximumLength = Math.Min(contents.Length, Console.WindowWidth - left + originX);
+        Console.SetCursorPosition(left, top);
+        Console.Write(contents[..maximumLength]);
+    }
+
+    public RenderArea(int width, int height, int offsetX, int offsetY)
     {
         Height = height;
         OffsetX = offsetX;
@@ -31,11 +48,20 @@ public class RenderArea
         Width = width;
 
         // Check for overlap with other active RenderAreas.
-        foreach (RenderArea renderArea in activeAreas)
-        {
+        foreach (RenderArea otherArea in activeAreas)
+            if ((otherArea.OffsetX <= offsetX + width
+                || otherArea.OffsetX + otherArea.Width >= offsetX)
+                && (otherArea.OffsetY <= offsetY + height
+                || otherArea.OffsetY + otherArea.Height >= offsetY))
+                throw new ArgumentException("Render Area overlaps other active Render Areas");
 
-        }
+        // Prepare Console area.
+        string clearString = new(' ', width);
+        for (int top = offsetY; top <= offsetY + height; top++)
+            Print(clearString, offsetX, top);
 
         activeAreas.Add(this);
     }
+
+    ~RenderArea() => Close();
 }
